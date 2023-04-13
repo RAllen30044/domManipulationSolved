@@ -1,8 +1,8 @@
 /**
  * SORTING NODES WITHIN A CONTAINER
  * Please, make sure to read the following files in the exercises-info folder before you start
- * * "02 SortingNode.md" 
-*/
+ * * "02 SortingNode.md"
+ */
 
 /**
  * @task
@@ -12,8 +12,8 @@
  */
 
 // Your code goes here...
-
-
+const allItems = document.querySelectorAll(".item");
+console.log(allItems);
 
 /**
  * @task
@@ -23,8 +23,8 @@
  */
 
 // Your code goes here...
-
-
+const sortBtn = document.querySelectorAll(".sortBtn");
+console.log(sortBtn[0].dataset.sortdir, sortBtn[1].dataset.sortdir);
 
 /**
  * @task
@@ -38,8 +38,24 @@
  */
 
 // Your code goes here...
+const main = document.getElementById("main");
+const items = Array.from(allItems);
 
-
+const sortData = (direction) => {
+  if (direction === "desc") {
+    items.sort((a, b) => {
+      if (a.innerText > b.innerText) return -1;
+      if (a.innerText < b.innerText) return 1;
+      return 0;
+    });
+  } else {
+    items.sort((a, b) => {
+if (a.innerText > b.innerText) return 1;
+ if (a.innerText < b.innerText) return -1;
+return 0;
+    });
+  }
+};
 
 /**
  * @task
@@ -49,6 +65,12 @@
  * * Make the sortData function call, assign the item's dataset sortdir property
  */
 
+sortBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    sortData(button.getAttribute("data-sortdir"));
+    items.forEach((item) => {
+      main.append(item);
+    });
+  });
+});
 // Your code goes here...
-
-
