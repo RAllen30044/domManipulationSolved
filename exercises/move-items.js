@@ -2,7 +2,7 @@
  * SORTING NODES WITHIN A CONTAINER
  * Please, make sure to read the following files in the exercises-info folder before you start
  * * 01 SelectNodes.md
-*/
+ */
 
 /**
  * @task
@@ -12,8 +12,8 @@
  */
 
 // Your code goes here...
-
-
+const allItems = document.querySelectorAll(".item");
+console.log(allItems);
 
 /**
  * @task
@@ -24,8 +24,8 @@
 
 // Your code goes here
 
-
-
+const main = document.getElementById("main");
+console.log(main);
 /**
  * @task
  * Select the favorites container by id of "favs"
@@ -34,8 +34,8 @@
  */
 
 // Your code goes here
-
-
+const favs = document.getElementById("favs");
+console.log(favs);
 
 /**
  * @task
@@ -48,7 +48,39 @@
 
 // Your code goes here
 
+const updateCollections = (id, direction) => {
+  const favArray = [];
+  const mainArray = [];
+  const newArray = Array.from(allItems);
+  const deleted = newArray.splice(id - 1, 1);
+  newArray.push(deleted[0]);
+  newArray.sort((a, b) => {
+    if (a.id > b.id) {
+      return 1;
+    }
+    if (a.id < b.id) {
+      return -1;
+    }
+    return 0;
+  });
 
+const append = (array, icon, list)=>{
+      array.push(deleted[0]);
+      const items = array.forEach((item) => {
+        item.children[0].setAttribute("class", `fa-solid ${icon}`);
+        list.appendChild(item);
+      });
+      return items;
+}
+
+  if (direction === "toFavs") {
+append(favArray, 'fa-heart-crack', favs);
+  }
+  if (direction === "toMain") {
+append(mainArray, 'fa-heart-circle-plus', main);
+  }
+  return "Error in direction";
+};
 
 /**
  * @task
@@ -65,5 +97,13 @@
  */
 
 // Your code goes here...
-
-
+console.log(allItems[0].id);
+allItems.forEach((element) => {
+  element.addEventListener("click", () => {
+    if (element.parentElement.id === "main") {
+      updateCollections(element.id, "toFavs");
+    } else {
+      updateCollections(element.id, "toMain");
+    }
+  });
+});
