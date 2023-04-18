@@ -51,33 +51,24 @@ console.log(favs);
 const updateCollections = (id, direction) => {
   const favArray = [];
   const mainArray = [];
+
   const newArray = Array.from(allItems);
-  const deleted = newArray.splice(id - 1, 1);
-  newArray.push(deleted[0]);
-  newArray.sort((a, b) => {
-    if (a.id > b.id) {
-      return 1;
-    }
-    if (a.id < b.id) {
-      return -1;
-    }
-    return 0;
-  });
 
-const append = (array, icon, list)=>{
-      array.push(deleted[0]);
-      const items = array.forEach((item) => {
-        item.children[0].setAttribute("class", `fa-solid ${icon}`);
-        list.appendChild(item);
-      });
-      return items;
-}
-
+  const append = (array, icon, list) => {
+    const deleted = newArray.splice(id, 1);
+    array.push(deleted[0]);
+    const items = array.forEach((item) => {
+      item.children[0].setAttribute("class", `fa-solid ${icon}`);
+      list.appendChild(item);
+    });
+    return items;
+  };
+  console.log(newArray);
   if (direction === "toFavs") {
-append(favArray, 'fa-heart-crack', favs);
+    append(favArray, "fa-heart-crack", favs);
   }
   if (direction === "toMain") {
-append(mainArray, 'fa-heart-circle-plus', main);
+    append(mainArray, "fa-heart-circle-plus", main);
   }
   return "Error in direction";
 };
@@ -99,11 +90,13 @@ append(mainArray, 'fa-heart-circle-plus', main);
 // Your code goes here...
 console.log(allItems[0].id);
 allItems.forEach((element) => {
-  element.addEventListener("click", () => {
+  element.addEventListener("click", (event) => {
+    const index = Array.from(allItems).indexOf(event.target);
+
     if (element.parentElement.id === "main") {
-      updateCollections(element.id, "toFavs");
+      updateCollections(index, "toFavs");
     } else {
-      updateCollections(element.id, "toMain");
+      updateCollections(index, "toMain");
     }
   });
 });
