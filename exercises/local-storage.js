@@ -44,6 +44,9 @@ const cardsArray = Array.from(cards);
 let data = {
   favorites: [],
 };
+if(!localStorage.getItem('favorites')){
+  localStorage.setItem('favorites',JSON.stringify(data));
+}
 let storageFavsDataRaw = localStorage.getItem("favorites");
 let updatedData = JSON.parse(storageFavsDataRaw);
 

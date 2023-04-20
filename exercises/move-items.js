@@ -50,29 +50,25 @@ console.log(favs);
 const favArray = [];
 const mainArray = Array.from(allItems);
 
+const append = (id, array, originArray, container, classItem) => {
+  const deleted = originArray.splice(id, 1);
+  array.push(deleted[0]);
+  array.forEach((element) => {
+    container.append(element);
+    element.firstChild.nextSibling.setAttribute(
+      "class",
+      `fa-solid ${classItem}`
+    );
+  });
+};
 const updateCollections = (id, direction) => {
+  if (direction === "toFavs") {
+    append(id, favArray, mainArray, favs, "fa-heart-crack");
+  }else{
+    append(id, mainArray, favArray, main, "fa-heart-circle-plus");
+  }
 
-  let deletes;
- 
-    if (direction === "toFavs") {
- deletes= mainArray.splice(id,1);
- favArray.push(deletes[0])
- favArray.forEach((element)=>{
-  favs.append(element);
- element.firstChild.nextSibling.setAttribute('class', 'fa-solid fa-heart-crack')
- })
-   }
-
-    if (direction === "toMain") {
-      deletes= favArray.splice(id,1);
-      mainArray.push(deletes[0])
-      mainArray.forEach((element)=>{
-       main.append(element);
-       element.firstChild.nextSibling.setAttribute('class', 'fa-solid fa-heart-circle-plus')
-    })
-    return "Error in direction";
-  };
-}
+};
 
 /**
  * @task
@@ -93,7 +89,7 @@ const updateCollections = (id, direction) => {
 allItems.forEach((element) => {
   element.addEventListener("click", (event) => {
     const mainIndex = mainArray.indexOf(event.target);
-    const favIndex =  favArray.indexOf(event.target)
+    const favIndex = favArray.indexOf(event.target);
 
     if (element.parentElement.id === "main") {
       updateCollections(mainIndex, "toFavs");
