@@ -47,31 +47,32 @@ console.log(favs);
  */
 
 // Your code goes here
+const favArray = [];
+const mainArray = Array.from(allItems);
 
 const updateCollections = (id, direction) => {
-  const favArray = [];
-  const mainArray = [];
 
-  const newArray = Array.from(allItems);
+  let deletes;
+ 
+    if (direction === "toFavs") {
+ deletes= mainArray.splice(id,1);
+ favArray.push(deletes[0])
+ favArray.forEach((element)=>{
+  favs.append(element);
+ element.firstChild.nextSibling.setAttribute('class', 'fa-solid fa-heart-crack')
+ })
+   }
 
-  const append = (array, icon, list) => {
-    const deleted = newArray.splice(id, 1);
-    array.push(deleted[0]);
-    const items = array.forEach((item) => {
-      item.children[0].setAttribute("class", `fa-solid ${icon}`);
-      list.appendChild(item);
-    });
-    return items;
+    if (direction === "toMain") {
+      deletes= favArray.splice(id,1);
+      mainArray.push(deletes[0])
+      mainArray.forEach((element)=>{
+       main.append(element);
+       element.firstChild.nextSibling.setAttribute('class', 'fa-solid fa-heart-circle-plus')
+    })
+    return "Error in direction";
   };
-  console.log(newArray);
-  if (direction === "toFavs") {
-    append(favArray, "fa-heart-crack", favs);
-  }
-  if (direction === "toMain") {
-    append(mainArray, "fa-heart-circle-plus", main);
-  }
-  return "Error in direction";
-};
+}
 
 /**
  * @task
@@ -88,15 +89,16 @@ const updateCollections = (id, direction) => {
  */
 
 // Your code goes here...
-console.log(allItems[0].id);
+
 allItems.forEach((element) => {
   element.addEventListener("click", (event) => {
-    const index = Array.from(allItems).indexOf(event.target);
+    const mainIndex = mainArray.indexOf(event.target);
+    const favIndex =  favArray.indexOf(event.target)
 
     if (element.parentElement.id === "main") {
-      updateCollections(index, "toFavs");
+      updateCollections(mainIndex, "toFavs");
     } else {
-      updateCollections(index, "toMain");
+      updateCollections(favIndex, "toMain");
     }
   });
 });
