@@ -13,7 +13,7 @@
 
 // Your code goes here...
 const allItems = document.querySelectorAll(".item");
-console.log(allItems);
+
 
 /**
  * @task
@@ -24,7 +24,7 @@ console.log(allItems);
 
 // Your code goes here...
 const sortBtn = document.querySelectorAll(".sortBtn");
-console.log(sortBtn[0].dataset.sortdir, sortBtn[1].dataset.sortdir);
+
 
 /**
  * @task
@@ -65,6 +65,8 @@ return 0;
  * * Make the sortData function call, assign the item's dataset sortdir property
  */
 
+
+// Your code goes here...
 sortBtn.forEach((button) => {
   button.addEventListener("click", () => {
     sortData(button.getAttribute("data-sortdir"));
@@ -73,4 +75,3 @@ sortBtn.forEach((button) => {
     });
   });
 });
-// Your code goes here...
