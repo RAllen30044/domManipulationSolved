@@ -39,6 +39,7 @@
 
 // Your code goes here...
 const container = document.getElementsByClassName("cardsContainer");
+const containerElement = container[0];
 const cards = document.getElementsByClassName('card')
 const cardsArray = Array.from(cards);
 let data = {
@@ -52,7 +53,7 @@ let updatedData = JSON.parse(storageFavsDataRaw);
 
 
  
-  container[0].addEventListener("click", (e) => {
+  const callbackFn = (e) => {
     const item = e.target;
     const list = Array.from(item.classList);
     let favId = item.id;
@@ -66,7 +67,10 @@ let updatedData = JSON.parse(storageFavsDataRaw);
       }
     }
     localStorage.setItem("favorites", JSON.stringify(updatedData));
-  });
+  };
+containerElement.addEventListener('click', callbackFn);
+
+
   cardsArray.forEach((card) => { 
   const ID = card.id;
   if (updatedData.favorites.includes(ID)) {
