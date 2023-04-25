@@ -38,8 +38,8 @@
  */
 
 // Your code goes here...
-const cards = document.getElementsByClassName("card");
-
+const container = document.getElementsByClassName("cardsContainer");
+const cards = document.getElementsByClassName('card')
 const cardsArray = Array.from(cards);
 let data = {
   favorites: [],
@@ -50,9 +50,9 @@ if(!localStorage.getItem('favorites')){
 let storageFavsDataRaw = localStorage.getItem("favorites");
 let updatedData = JSON.parse(storageFavsDataRaw);
 
-cardsArray.forEach((card) => {
-  const ID = card.id;
-  card.addEventListener("click", (e) => {
+
+ 
+  container[0].addEventListener("click", (e) => {
     const item = e.target;
     const list = Array.from(item.classList);
     let favId = item.id;
@@ -67,6 +67,8 @@ cardsArray.forEach((card) => {
     }
     localStorage.setItem("favorites", JSON.stringify(updatedData));
   });
+  cardsArray.forEach((card) => { 
+  const ID = card.id;
   if (updatedData.favorites.includes(ID)) {
     card.style.backgroundColor = "red";
   } else {

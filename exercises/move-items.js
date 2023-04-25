@@ -13,7 +13,7 @@
 
 // Your code goes here...
 const allItems = document.querySelectorAll(".item");
-console.log(allItems);
+
 
 /**
  * @task
@@ -25,7 +25,7 @@ console.log(allItems);
 // Your code goes here
 
 const main = document.getElementById("main");
-console.log(main);
+
 /**
  * @task
  * Select the favorites container by id of "favs"
@@ -35,7 +35,7 @@ console.log(main);
 
 // Your code goes here
 const favs = document.getElementById("favs");
-console.log(favs);
+
 
 /**
  * @task
