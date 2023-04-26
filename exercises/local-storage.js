@@ -42,7 +42,9 @@ const container = document.getElementsByClassName("cardsContainer");
 const containerElement = container[0];
 const cards = document.getElementsByClassName('card')
 const cardsArray = Array.from(cards);
-let data = {
+
+
+const data = {
   favorites: [],
 };
 if(!localStorage.getItem('favorites')){
@@ -51,6 +53,14 @@ if(!localStorage.getItem('favorites')){
 let storageFavsDataRaw = localStorage.getItem("favorites");
 let updatedData = JSON.parse(storageFavsDataRaw);
 
+  cardsArray.forEach((card) => { 
+  const ID = card.id;
+  if (updatedData.favorites.includes(ID)) {
+    card.style.backgroundColor = "red";
+  } else {
+    card.style.backgroundColor = "white";
+  }
+});
 
  
   const callbackFn = (e) => {
@@ -71,11 +81,4 @@ let updatedData = JSON.parse(storageFavsDataRaw);
 containerElement.addEventListener('click', callbackFn);
 
 
-  cardsArray.forEach((card) => { 
-  const ID = card.id;
-  if (updatedData.favorites.includes(ID)) {
-    card.style.backgroundColor = "red";
-  } else {
-    card.style.backgroundColor = "white";
-  }
-});
+
